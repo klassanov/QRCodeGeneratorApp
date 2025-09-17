@@ -4,15 +4,12 @@ namespace QRCodeGeneratorApp.Console
 {
     internal static class GridCreator
     {
-        internal static void CreateGrid(bool[,] qrMap, int length)
+        internal static string CreateGrid(bool[,] qrMap)
         {
-
-            int N = length;                          // grid dimension (NxN)
-            int cellSize = 50;                   // size of each square cell in pixels
-                                                 // FillMode mode = FillMode.Checkerboard; // or FillMode.Random
-            int paddingNumber = 40;              // space reserved for numbers on each side
+            int N = qrMap.GetLength(0);          // grid dimension (NxN)
+            int cellSizePx = 50;                 // size of each square cell in pixels
+            int paddingNumber = 50;              // space reserved for numbers on each side
             string outFile = "grid_skia.png";
-            //var rand = new Random(0);            // deterministic; change seed if you like
 
             // --- compute canvas size ---
             int topMargin = paddingNumber;
@@ -20,8 +17,8 @@ namespace QRCodeGeneratorApp.Console
             int leftMargin = paddingNumber;
             int rightMargin = paddingNumber;
 
-            int width = leftMargin + (N * cellSize) + rightMargin;
-            int height = topMargin + (N * cellSize) + bottomMargin;
+            int width = leftMargin + (N * cellSizePx) + rightMargin;
+            int height = topMargin + (N * cellSizePx) + bottomMargin;
 
             using var surface = SKSurface.Create(new SKImageInfo(width, height));
             SKCanvas canvas = surface.Canvas;
@@ -36,9 +33,9 @@ namespace QRCodeGeneratorApp.Console
                 {
                     SKColor fillColor = qrMap[r, c] ? SKColors.Black : SKColors.White;
 
-                    int x = leftMargin + c * cellSize;
-                    int y = topMargin + r * cellSize;
-                    var rect = new SKRect(x, y, x + cellSize, y + cellSize);
+                    int x = leftMargin + c * cellSizePx;
+                    int y = topMargin + r * cellSizePx;
+                    var rect = new SKRect(x, y, x + cellSizePx, y + cellSizePx);
                     using var paint = new SKPaint
                     {
                         Color = fillColor,
@@ -58,13 +55,13 @@ namespace QRCodeGeneratorApp.Console
             {
                 for (int i = 0; i <= N; i++)
                 {
-                    int x = leftMargin + i * cellSize;
-                    canvas.DrawLine(x, topMargin, x, topMargin + N * cellSize, pen);
+                    int x = leftMargin + i * cellSizePx;
+                    canvas.DrawLine(x, topMargin, x, topMargin + N * cellSizePx, pen);
                 }
                 for (int i = 0; i <= N; i++)
                 {
-                    int y = topMargin + i * cellSize;
-                    canvas.DrawLine(leftMargin, y, leftMargin + N * cellSize, y, pen);
+                    int y = topMargin + i * cellSizePx;
+                    canvas.DrawLine(leftMargin, y, leftMargin + N * cellSizePx, y, pen);
                 }
             }
 
@@ -83,26 +80,26 @@ namespace QRCodeGeneratorApp.Console
             for (int c = 0; c < N; c++)
             {
                 string label = (c + 1).ToString();
-                float centerX = leftMargin + c * cellSize + cellSize / 2f;
+                float centerX = leftMargin + c * cellSizePx + cellSizePx / 2f;
 
                 // top
                 canvas.DrawText(label, centerX, topMargin / 2f + textFont.Size / 2f, SKTextAlign.Center, textFont, textPaint);
 
                 // bottom
-                canvas.DrawText(label, centerX, topMargin + N * cellSize + bottomMargin / 2f + textFont.Size / 2f, SKTextAlign.Center, textFont, textPaint);
+                canvas.DrawText(label, centerX, topMargin + N * cellSizePx + bottomMargin / 2f + textFont.Size / 2f, SKTextAlign.Center, textFont, textPaint);
             }
 
             // row numbers (left & right)
             for (int r = 0; r < N; r++)
             {
                 string label = (r + 1).ToString();
-                float centerY = topMargin + r * cellSize + cellSize / 2f + textFont.Size / 2f;
+                float centerY = topMargin + r * cellSizePx + cellSizePx / 2f + textFont.Size / 2f;
 
                 // left
                 canvas.DrawText(label, leftMargin / 2f, centerY, SKTextAlign.Center, textFont, textPaint);
 
                 // right
-                canvas.DrawText(label, leftMargin + N * cellSize + rightMargin / 2f, centerY, SKTextAlign.Center, textFont, textPaint);
+                canvas.DrawText(label, leftMargin + N * cellSizePx + rightMargin / 2f, centerY, SKTextAlign.Center, textFont, textPaint);
             }
 
             // save to file
@@ -110,6 +107,8 @@ namespace QRCodeGeneratorApp.Console
             using var data = image.Encode(SKEncodedImageFormat.Png, 100);
             using var stream = File.OpenWrite(outFile);
             data.SaveTo(stream);
+
+            return outFile;
 
         }
     }
