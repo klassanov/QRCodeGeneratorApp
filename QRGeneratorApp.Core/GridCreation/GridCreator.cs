@@ -1,10 +1,10 @@
 ﻿using SkiaSharp;
 
-namespace QRCodeGeneratorApp.Console
+namespace QRGeneratorApp.Core.GridCreation
 {
-    internal static class GridCreator
+    public static class GridCreator
     {
-        internal static string CreateGrid(bool[,] qrMap)
+        public static string CreateGrid(bool[,] qrMap)
         {
             int N = qrMap.GetLength(0);          // grid dimension (NxN)
             int cellSizePx = 50;                 // size of each square cell in pixels
@@ -17,8 +17,8 @@ namespace QRCodeGeneratorApp.Console
             int leftMargin = paddingNumber;
             int rightMargin = paddingNumber;
 
-            int width = leftMargin + (N * cellSizePx) + rightMargin;
-            int height = topMargin + (N * cellSizePx) + bottomMargin;
+            int width = leftMargin + N * cellSizePx + rightMargin;
+            int height = topMargin + N * cellSizePx + bottomMargin;
 
             using var surface = SKSurface.Create(new SKImageInfo(width, height));
             SKCanvas canvas = surface.Canvas;

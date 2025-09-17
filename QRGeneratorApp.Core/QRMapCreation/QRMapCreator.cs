@@ -1,14 +1,13 @@
 ﻿using Net.Codecrete.QrCodeGenerator;
 
-namespace QRCodeGeneratorApp.Console
+namespace QRGeneratorApp.Core.QRMapCreation
 {
-    internal class QRManager
+    public class QRMapCreator
     {
-        internal static bool[,] GenerateQRMap(string text)
+        public static bool[,] GenerateQRMap(string text)
         {
             // Create the QR code symbol
             var qr = QrCode.EncodeText(text, QrCode.Ecc.Low);
-            
             //qr.SaveAsPng(filename, scale: 10, border: 4);
 
             bool[,] qrMap = new bool[qr.Size,qr.Size];
@@ -23,6 +22,5 @@ namespace QRCodeGeneratorApp.Console
 
             return qrMap;
         }
-
     }
 }
