@@ -2,13 +2,20 @@
 
 namespace QRGeneratorApp.Core.GridCreation
 {
-    public static class GridCreator
+    internal class GridCreator: IGridCreator
     {
-        public static string CreateGrid(bool[,] qrMap)
+        private readonly GridConfig config;
+
+        public GridCreator(GridConfig config)
+        {
+            this.config = config;
+        }
+
+        public string CreateGrid(bool[,] qrMap)
         {
             int N = qrMap.GetLength(0);          // grid dimension (NxN)
-            int cellSizePx = 50;                 // size of each square cell in pixels
-            int paddingNumber = 50;              // space reserved for numbers on each side
+            int cellSizePx = config.CellSizePx;                 // size of each square cell in pixels
+            int paddingNumber = config.PaddingNumber;              // space reserved for numbers on each side
             string outFile = "grid_skia.png";
 
             // --- compute canvas size ---
@@ -49,7 +56,7 @@ namespace QRGeneratorApp.Core.GridCreation
             using (var pen = new SKPaint
             {
                 Color = SKColors.Gray,
-                StrokeWidth = 1,
+                StrokeWidth = config.StrokeThrough,
                 IsStroke = true
             })
             {
@@ -73,7 +80,7 @@ namespace QRGeneratorApp.Core.GridCreation
             };
             using var textFont = new SKFont
             {
-                Size = 20 // Set desired font size here
+                Size = config.FontSize // Set desired font size here
             };
 
             // column numbers (top & bottom)

@@ -1,9 +1,22 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using QRGeneratorApp.Core;
 using QRGeneratorApp.Core.GridCreation;
 using QRGeneratorApp.Core.QRMapCreation;
 
-Console.WriteLine("Hello, World!");
 
-var qrMap= QRMapCreator.GenerateQRMap("Бониии! Как сме днес?");
-var filepath = GridCreator.CreateGrid(qrMap);
+var builder = Host.CreateDefaultBuilder(args).ConfigureServices(services =>
+{
+    var gridConfig = new GridConfig();
+    services.AddSingleton(gridConfig);
+    services.RegisterCoreServices();
+});
+
+var app = builder.Build();
+
+var qrMapCreator = app.Services.GetRequiredService<IQRMapCreator>();
+var qrMap = qrMapCreator.GenerateQRMap("Обичам те, Бони!");
+var gridCreator = app.Services.GetRequiredService<IGridCreator>();
+var filepath = gridCreator.CreateGrid(qrMap);
+
 Console.WriteLine($"File saved to {filepath}");
