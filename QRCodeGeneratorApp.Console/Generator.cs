@@ -32,7 +32,9 @@ namespace QRCodeGeneratorApp.Console
                 }
             }
 
-            DrawGrid(qrMap, qr.Size);
+            //DrawGrid(qrMap, qr.Size);
+
+            GridCreator.CreateGrid(qrMap, qr.Size);
 
 
             //Console.WriteLine($"The QR code has been saved as {Path.GetFullPath(filename)}");
