@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,7 @@ builder.Services.AddOpenApi(options =>
     //Customize the generated Open Api document 
     options.AddDocumentTransformer((document, context, canellationToken) =>
     {
-        document.Info.Title = "Customized Open Api Title";
+        document.Info.Title = "Customized Open Api Title - Generate QR code";
         document.Info.Contact = new OpenApiContact
         {
             Name = "Alexander Klassanov",
@@ -48,6 +49,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    //Substitute Swagger UI, can be customized as well
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
