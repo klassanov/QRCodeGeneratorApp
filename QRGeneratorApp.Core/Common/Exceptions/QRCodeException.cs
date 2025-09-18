@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QRGeneratorApp.Core.Common.Exceptions
 {
-    public class QRCodeException
+    public class QRCodeException: Exception
     {
     }
 }
