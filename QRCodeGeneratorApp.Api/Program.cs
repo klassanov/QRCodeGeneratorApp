@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using QRCodeGeneratorApp.Api.ExceptionHandling;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,12 +29,23 @@ builder.Services.AddOpenApi(options =>
 
 
 
+//Global exception handling and custom exception handlers=> the order matters
+//ASP.NET Core will use the first one that returns true from TryHandleAsync.
+builder.Services.AddExceptionHandler<QRCodeExceptionHandler>()
+                .AddExceptionHandler<GlobalExceptionHandler>();
+
+
+
+//Add ProblemDetails support
+builder.Services.AddProblemDetails();
+
+
 var app = builder.Build();
 
 
 
-
-
+//Use custom global exception handling
+app.UseExceptionHandler();
 
 
 
@@ -74,6 +86,20 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+
+
+app.MapGet("/exception/{exceptionType}", (string exceptionType) =>
+{
+    var ex = exceptionType.ToLower() switch
+    {
+        "application" => new ApplicationException("This is a test application exception from /exception endpoint"),
+        "invalidoperation" => new InvalidOperationException("This is a test invalid operation exception from /exception endpoint"),
+        _ => new Exception("This is a test exception from /exception endpoint")
+    };
+
+    throw ex;
+});
 
 app.Run();
 

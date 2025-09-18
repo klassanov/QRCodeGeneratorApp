@@ -11,4 +11,8 @@
     <PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QRGeneratorApp.Core\QRGeneratorApp.Core.csproj" />
+  </ItemGroup>
+
 </Project>
