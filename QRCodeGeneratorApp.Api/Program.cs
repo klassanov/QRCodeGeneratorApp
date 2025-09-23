@@ -1,3 +1,4 @@
+using Carter;
 using Microsoft.OpenApi.Models;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
 using Scalar.AspNetCore;
@@ -39,6 +40,9 @@ builder.Services.AddExceptionHandler<QRCodeExceptionHandler>()
 //Add ProblemDetails support
 builder.Services.AddProblemDetails();
 
+//Automatic minimal APIs registration service
+builder.Services.AddCarter();
+
 
 var app = builder.Build();
 
@@ -46,16 +50,6 @@ var app = builder.Build();
 
 //Use custom global exception handling
 app.UseExceptionHandler();
-
-
-
-
-
-
-
-
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -68,42 +62,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+//Automatic minimal APIs registration
+app.MapCarter();
 
 
 
-app.MapGet("/exception/{exceptionType}", (string exceptionType) =>
-{
-    var ex = exceptionType.ToLower() switch
-    {
-        "application" => new ApplicationException("This is a test application exception from /exception endpoint"),
-        "invalidoperation" => new InvalidOperationException("This is a test invalid operation exception from /exception endpoint"),
-        _ => new Exception("This is a test exception from /exception endpoint")
-    };
-
-    throw ex;
-});
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+
