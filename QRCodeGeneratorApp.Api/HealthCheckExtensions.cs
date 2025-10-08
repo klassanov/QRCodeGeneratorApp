@@ -1,0 +1,142 @@
+﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using QRCodeGeneratorApp.Api.Healthchecks;
+using QRCodeGeneratorApp.Api.Healthchecks.ResponseWriters;
+
+namespace QRCodeGeneratorApp.Api;
+
+public static class HealthCheckExtensions
+{
+    public static IServiceCollection RegisterHealthChecks(this IServiceCollection services, IConfiguration configuration)
+    {
+        //Basic health proble
+        var healthcheckBuilder = services.AddHealthChecks();
+
+        //Add Custom Healthcheck Service (also possible to use healthcheckBuilder variable, cause AddHealthChecks() is idempotent and returns this variable)
+        services.AddHealthChecks()
+                        .AddCheck<SampleHealthCheck>(
+            name: "Sample",
+            failureStatus: HealthStatus.Degraded, //optional, by default it's Unhealthy, but we can set what to be in case of failure
+            tags: ["sample"]); //optional, used for filtering
+
+        //Another way to add the same custom health check
+        //healthcheckBuilder.AddCheck<CustomHealthcheck>(
+        //    name: "Sample",
+        //    failureStatus: HealthStatus.Degraded,
+        //    tags: ["sample"]);
+
+
+        //Lambda function that returns always healthy result
+        healthcheckBuilder.AddCheck(
+            name: "self",
+            check: () =>
+            {
+                return HealthCheckResult.Degraded();
+            });
+
+
+        //Pass arguments to healthcheck constructor
+        healthcheckBuilder.AddTypeActivatedCheck<SampleHealthcheckWithArgs>(
+            name: "SampleWithArgs",
+            failureStatus: HealthStatus.Degraded,
+            tags: ["samplewithargs"],
+            args: ["argument1", 123]);
+
+
+        //Use tags for filtering
+        healthcheckBuilder.AddCheck<SampleHealthCheckWithTags>(
+            name: "SampleWithTags",
+            tags: ["tag1", "tag2"]);
+
+
+        //Nice way to reuse tags defined in the healthcheck class
+        healthcheckBuilder.AddCheck<SampleHealthCheckWIthTags2>(
+            name: "SampleWithTags2",
+            tags: SampleHealthCheckWIthTags2.Tags
+        );
+
+        //Add SQL Server healthcheck
+        //AspNetCore.Diagnostics.HealthChecks library that we installed and is used here isn't maintained or supported by Microsoft.
+        //It tests the conn string by creating an SELECT 1 query, so it should be lightweight.
+        //We can also provdide a custom implementation for this, but should use a lightweight query to avoid overhead on the DB server.
+        healthcheckBuilder.AddSqlServer(
+            connectionString: configuration.GetConnectionString("AppUsersLocalDb")!,
+            name: "SQL Server",
+            tags: ["db", "sql", "sqlserver"]
+        );
+
+        //Add PostgreSQL healthcheck from the same library
+        //Shall start docker to get it healthy
+        healthcheckBuilder.AddNpgSql(
+            connectionString: configuration.GetConnectionString("PostgresDocker")!,
+            name: "PostgreSQL",
+            tags: ["db", "sql", "postgresql"]
+        );
+
+        return services;
+    }
+
+
+    public static void MapHealthChecksWithEndpoints(this WebApplication app)
+    {
+        //Routing: Map basic health endpoint (relative path or ?endpoint url?)
+        //No filtering, all healthcheks will be executed, independently if they have tags or not
+        app.MapHealthChecks("/healthz");
+
+
+        //Routing: Map healthcheck with tags filtering
+        app.MapHealthChecks("/healthz/tag1", new HealthCheckOptions()
+        {
+            //Only checks with tag1 will be included
+            //Execution condition (tags are added during registration of healthchecks)
+            Predicate = (check) => check.Tags.Contains("tag1")
+        });
+
+
+        //Customize Response status
+        app.MapHealthChecks("/healthz/tag2", new HealthCheckOptions()
+        {
+            //Filtering
+            Predicate = (check) => check.Tags.Contains("tag2"),
+
+            //Custom response status
+            ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Degraded] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+    },
+
+
+            //Custom response writer: can be lambda or a separate method
+            //There is another good example on the Microsoft docs
+            ResponseWriter = async (HttpContext context, HealthReport report) =>
+            {
+                context.Response.ContentType = "application/json";
+                var response = new
+                {
+                    status = report.Status.ToString(),
+                    checks = report.Entries.Select(entry => new
+                    {
+                        name = entry.Key,
+                        status = entry.Value.Status.ToString(),
+                        exception = entry.Value.Exception?.Message,
+                        duration = entry.Value.Duration.ToString()
+                    })
+                };
+                await context.Response.WriteAsJsonAsync(response);
+            }
+        });
+
+
+        //Databse probes
+        app.MapHealthChecks("/healthz/db", new HealthCheckOptions()
+        {
+            //Filtering
+            Predicate = (check) => check.Tags.Contains("db"),
+
+            //I am using a static class and method here for reusability
+            ResponseWriter = HealthCheckResponseWriter.WriteJsonResponse
+        });
+    }
+}
