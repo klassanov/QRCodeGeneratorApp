@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using System.Text;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using QRCodeGeneratorApp.Api.Healthchecks;
 using QRCodeGeneratorApp.Api.Healthchecks.ResponseWriters;
@@ -7,6 +8,15 @@ namespace QRCodeGeneratorApp.Api;
 
 public static class HealthCheckExtensions
 {
+
+    //Readiness vs Liveness Probes in Kubernetes  
+    //| Probe Type    | Question         | What Happens on Failure(Kubernetes)   | Purpose                         |
+    //| ------------- | ---------------- | ------------------------------------- | ------------------------------- |
+    //| **Liveness**  | “Are you alive?” | Pod is **restarted**                  | Recover from crashes            |
+    //| **Readiness** | “Are you ready?” | Pod is **removed from load balancer** | Avoid sending traffic too early |
+
+
+
     public static IServiceCollection RegisterHealthChecks(this IServiceCollection services, IConfiguration configuration)
     {
         //Basic health proble
