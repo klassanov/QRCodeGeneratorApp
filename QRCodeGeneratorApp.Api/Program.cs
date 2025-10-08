@@ -2,6 +2,7 @@ using Carter;
 using Microsoft.OpenApi.Models;
 using QRCodeGeneratorApp.Api;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
+using QRCodeGeneratorApp.Api.StartupTasks;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +47,9 @@ builder.Services.AddCarter();
 
 //Custom healthecks registration
 builder.Services.RegisterHealthChecks(builder.Configuration);
+
+//Long-running startup task
+builder.Services.AddHostedService<StartupBackgroundService>();
 
 
 var app = builder.Build();

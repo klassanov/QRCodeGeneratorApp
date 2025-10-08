@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace QRCodeGeneratorApp.Api.Healthchecks
+namespace QRCodeGeneratorApp.Api.Healthcheck.Checks
 {
     public class SampleHealthCheckWIthTags2 : IHealthCheck
     {

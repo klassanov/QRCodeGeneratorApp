@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace QRCodeGeneratorApp.Api.Healthchecks.ResponseWriters
+namespace QRCodeGeneratorApp.Api.Healthcheck.ResponseWriters
 {
     public class HealthCheckResponseWriter
     {

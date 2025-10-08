@@ -1,8 +1,8 @@
-﻿using System.Text;
+﻿using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using QRCodeGeneratorApp.Api.Healthchecks;
-using QRCodeGeneratorApp.Api.Healthchecks.ResponseWriters;
+using QRCodeGeneratorApp.Api.Healthcheck.Checks;
+using QRCodeGeneratorApp.Api.Healthcheck.ResponseWriters;
 
 namespace QRCodeGeneratorApp.Api;
 
@@ -83,6 +83,37 @@ public static class HealthCheckExtensions
             tags: ["db", "sql", "postgresql"]
         );
 
+        //Note: db probes as well as any other healthcheck can have a custom implementation, whatever U like
+
+        services.AddSingleton<StartupHealthCheck>();
+
+
+        //Readiness healthcheck
+        healthcheckBuilder.AddCheck<StartupHealthCheck>(
+            name: "Startup",
+            failureStatus: HealthStatus.Unhealthy,
+            tags: ["ready"]
+        );
+
+
+        //Publher: we have different config options here
+        //healthcheckBuilder.Services.Configure<HealthCheckPublisherOptions>(options =>
+        //{
+        //    options.Delay = TimeSpan.FromSeconds(5); //Initial delay before starting publishing
+        //    options.Period = TimeSpan.FromSeconds(10); //Period between executions
+        //    options.Timeout = TimeSpan.FromSeconds(10); //Timeout for the whole publishing process
+        //    options.Predicate = (check) => true; //Publish all healthchecks, can be filtered by tags as well
+        //});
+        //services.AddSingleton<IHealthCheckPublisher, SampleHealthCheckPublisher>();
+
+        //Add UI for healthchecks
+        services.AddHealthChecksUI(setupSettings: setup =>
+                {
+                    setup.SetEvaluationTimeInSeconds(20); // Configures the UI to poll for healthchecks updates every 5 seconds
+                    setup.AddHealthCheckEndpoint("Check All Health Check", "/healthz/all"); // Map health check endpoint)
+                })
+                .AddInMemoryStorage();
+
         return services;
     }
 
@@ -92,6 +123,8 @@ public static class HealthCheckExtensions
         //Routing: Map basic health endpoint (relative path or ?endpoint url?)
         //No filtering, all healthcheks will be executed, independently if they have tags or not
         app.MapHealthChecks("/healthz");
+
+        
 
 
         //Routing: Map healthcheck with tags filtering
@@ -148,5 +181,38 @@ public static class HealthCheckExtensions
             //I am using a static class and method here for reusability
             ResponseWriter = HealthCheckResponseWriter.WriteJsonResponse
         });
+
+        //Readiness probe endpoint
+        app.MapHealthChecks("/healthz/ready", new HealthCheckOptions()
+        {
+            Predicate = (check) => check.Tags.Contains("ready"),
+        });
+
+
+        //Liveness probe endpoint => does not run any of the registered healthchecks, just returns Healthy if the app is running
+        //Excludes all checks and reports a Healthy status for all calls.
+        //Note the difference with the first endpoint defined that runs all the healthcheks as a contrast
+        app.MapHealthChecks("/healthz/live", new HealthCheckOptions()
+        {
+            //No checks, just return 200 OK
+            Predicate = (_) => false
+        });
+
+        //Note: UseHealthChecks vs. MapHealthChecks
+        //https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-9.0#usehealthchecks-vs-maphealthchecks
+
+        //UI implementation
+
+        //Call all healthchecks with UI response writer
+        app.MapHealthChecks("/healthz/all", new HealthCheckOptions()
+        {
+            Predicate = _ => true,
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
+
+        app.UseRouting()
+           .UseEndpoints(config => config.MapHealthChecksUI());
+
+
     }
 }
