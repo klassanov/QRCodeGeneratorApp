@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using QRCodeGeneratorApp.Api.Healthcheck.Checks;
 using QRCodeGeneratorApp.Api.Healthcheck.ResponseWriters;
+using RabbitMQ.Client;
 
 namespace QRCodeGeneratorApp.Api;
 
@@ -106,6 +107,25 @@ public static class HealthCheckExtensions
         //});
         //services.AddSingleton<IHealthCheckPublisher, SampleHealthCheckPublisher>();
 
+
+
+        //services
+        //.AddSingleton<IConnection>(sp =>
+        //{
+        //    var factory = new ConnectionFactory
+        //    {
+        //        Uri = new Uri("amqps://user:pass@host/vhost"),
+        //    };
+        //    return factory.CreateConnectionAsync().GetAwaiter().GetResult();
+        //});
+
+
+        //healthcheckBuilder.AddRabbitMQ(
+        //    name:"RabbitMQ",
+        //    tags: ["rabbit"]);
+
+
+
         //Add UI for healthchecks
         services.AddHealthChecksUI(setupSettings: setup =>
                 {
@@ -115,6 +135,8 @@ public static class HealthCheckExtensions
                 .AddInMemoryStorage();
 
         return services;
+
+
     }
 
 
@@ -200,6 +222,13 @@ public static class HealthCheckExtensions
 
         //Note: UseHealthChecks vs. MapHealthChecks
         //https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-9.0#usehealthchecks-vs-maphealthchecks
+
+
+        app.MapHealthChecks("/healthz/rabbit", new HealthCheckOptions()
+        {
+            Predicate = (check) => check.Tags.Contains("rabbit"),
+            ResponseWriter = HealthCheckResponseWriter.WriteJsonResponse
+        });
 
         //UI implementation
 
