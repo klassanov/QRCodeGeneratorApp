@@ -21,7 +21,7 @@ builder.Services.AddOpenApi(options =>
             Email = "test@test.com",
             Url = new Uri("https://test.com")
         };
-        document.Info.License = new OpenApiLicense
+        document.Info.License = new OpenApiLicense 
         {
             Name = "MIT License",
             Url = new Uri("https://opensource.org/licenses/MIT")
