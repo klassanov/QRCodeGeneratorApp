@@ -17,6 +17,12 @@
     <PackageReference Include="Carter" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Scalar.AspNetCore" />
+
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp"  />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common"  />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+
   </ItemGroup>
 
   <ItemGroup>
