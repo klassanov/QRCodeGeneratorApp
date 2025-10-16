@@ -4,6 +4,7 @@ using QRCodeGeneratorApp.Api;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.StartupTasks;
 using Scalar.AspNetCore;
+using QRGeneratorApp.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,9 @@ builder.Services.RegisterHealthChecks(builder.Configuration);
 
 //Long-running startup task
 builder.Services.AddHostedService<StartupBackgroundService>();
+
+//Register services from the Core project
+builder.Services.RegisterCoreServices();
 
 
 var app = builder.Build();

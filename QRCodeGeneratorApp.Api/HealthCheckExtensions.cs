@@ -129,7 +129,7 @@ public static class HealthCheckExtensions
         //Add UI for healthchecks
         services.AddHealthChecksUI(setupSettings: setup =>
                 {
-                    setup.SetEvaluationTimeInSeconds(20); // Configures the UI to poll for healthchecks updates every 5 seconds
+                    setup.SetEvaluationTimeInSeconds(Convert.ToInt32(TimeSpan.FromMinutes(10).TotalSeconds)); // Configures the UI to poll for healthchecks updates every 5 seconds
                     setup.AddHealthCheckEndpoint("Check All Health Check", "/healthz/all"); // Map health check endpoint)
                 })
                 .AddInMemoryStorage();
