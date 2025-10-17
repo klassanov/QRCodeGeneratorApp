@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Net.Codecrete.QrCodeGenerator" />
+    <PackageReference Include="Scrutor" />
     <PackageReference Include="SkiaSharp" />
   </ItemGroup>
   

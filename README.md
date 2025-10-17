@@ -17,6 +17,7 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 - AspNetCore.HealthChecks.*
 - Carter
 - Scalar.AspNetCore
+- Scrutor
 
 
 

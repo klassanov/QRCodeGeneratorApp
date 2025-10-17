@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Extensions.DependencyInjection;
 using QRGeneratorApp.Core.ClientRequests.Get;
 using QRGeneratorApp.Core.Common.Mediator;
 using QRGeneratorApp.Core.GridCreation;
@@ -14,7 +15,18 @@ namespace QRGeneratorApp.Core
             services.AddTransient<IGridCreator, GridCreator>();
             services.AddTransient<IQRMapCreator, QRMapCreator>();
 
-            services.AddScoped<IQueryHandler<GetClientRequestQuery, GetClientRequestResult>, GetGlientRequestHandler>();
+            //services.AddScoped<IQueryHandler<GetClientRequestQuery, GetClientRequestResult>, GetGlientRequestHandler>();
+
+            //Automatic registration of all query handlers via Scrutor
+            services.Scan(scan => scan
+                .FromAssemblyOf<CurrentAssemblyMarker>()
+                .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
         }
+    }
+
+    internal class CurrentAssemblyMarker
+    {
     }
 }
