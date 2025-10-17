@@ -19,8 +19,9 @@ namespace QRGeneratorApp.Core
 
             //Automatic registration of all query handlers via Scrutor
             services.Scan(scan => scan
-                .FromAssemblyOf<CurrentAssemblyMarker>()
-                .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)))
+                //.FromAssemblyOf<CurrentAssemblyMarker>()
+                .FromAssembliesOf(typeof(DependencyInjection))
+                .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
         }
