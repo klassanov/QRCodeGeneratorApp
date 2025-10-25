@@ -5,7 +5,7 @@ using QRCodeGeneratorApp.Api.Healthcheck.Checks;
 using QRCodeGeneratorApp.Api.Healthcheck.ResponseWriters;
 using RabbitMQ.Client;
 
-namespace QRCodeGeneratorApp.Api;
+namespace QRCodeGeneratorApp.Api.Healthcheck;
 
 public static class HealthCheckExtensions
 {
@@ -175,7 +175,7 @@ public static class HealthCheckExtensions
 
             //Custom response writer: can be lambda or a separate method
             //There is another good example on the Microsoft docs
-            ResponseWriter = async (HttpContext context, HealthReport report) =>
+            ResponseWriter = async (context, report) =>
             {
                 context.Response.ContentType = "application/json";
                 var response = new

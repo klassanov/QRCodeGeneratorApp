@@ -11,6 +11,7 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 - Logical CQRS Pattern
 - Attempt to Build Clean Architecture Structure
 - Central Package Management using Directory.Build.props
+- Custom middleware addition 3 options: Conventional, Factory, Inline. Consume a scoped service in custom middleware
 
 ## List of First-Time Libraries Usage
 

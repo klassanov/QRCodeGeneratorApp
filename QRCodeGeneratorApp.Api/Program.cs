@@ -1,10 +1,12 @@
 using Carter;
 using Microsoft.OpenApi.Models;
-using QRCodeGeneratorApp.Api;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.StartupTasks;
 using Scalar.AspNetCore;
 using QRGeneratorApp.Core;
+using QRCodeGeneratorApp.Api.Healthcheck;
+using QRCodeGeneratorApp.Api.CustomMiddleware;
+using QRCodeGeneratorApp.Api.CustomMiddleware.CustomMiddlewareServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +57,8 @@ builder.Services.AddHostedService<StartupBackgroundService>();
 //Register services from the Core project
 builder.Services.RegisterCoreServices();
 
+builder.Services.AddCustomMiddleware();
+
 
 var app = builder.Build();
 
@@ -75,6 +79,9 @@ app.UseHttpsRedirection();
 
 //Automatic minimal APIs registration
 app.MapCarter();
+
+//Use my custom middleware
+app.UseCustomMiddleware();
 
 //Export to a separate file for better readability
 app.MapHealthChecksWithEndpoints();
