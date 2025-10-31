@@ -15,7 +15,7 @@ var builder = Host.CreateDefaultBuilder(args).ConfigureServices(services =>
 var app = builder.Build();
 
 var qrMapCreator = app.Services.GetRequiredService<IQRMapCreator>();
-var qrMap = qrMapCreator.GenerateQRMap("Обичам те, Бони!");
+var qrMap = qrMapCreator.GenerateQRMap("Саааааамо Левски!");
 var gridCreator = app.Services.GetRequiredService<IGridCreator>();
 var filepath = gridCreator.CreateGrid(qrMap);
 
