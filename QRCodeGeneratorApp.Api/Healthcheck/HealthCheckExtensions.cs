@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using QRCodeGeneratorApp.Api.Healthcheck.Checks;
 using QRCodeGeneratorApp.Api.Healthcheck.ResponseWriters;
-using RabbitMQ.Client;
 
 namespace QRCodeGeneratorApp.Api.Healthcheck;
 
@@ -146,7 +145,7 @@ public static class HealthCheckExtensions
         //No filtering, all healthcheks will be executed, independently if they have tags or not
         app.MapHealthChecks("/healthz");
 
-        
+
 
 
         //Routing: Map healthcheck with tags filtering

@@ -22,6 +22,6 @@ namespace QRCodeGeneratorApp.Api.CustomMiddleware.Implementations
 
             await next(context);
         }
-       
+
     }
 }

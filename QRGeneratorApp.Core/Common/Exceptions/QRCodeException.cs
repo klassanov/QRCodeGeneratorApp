@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QRGeneratorApp.Core.Common.Exceptions
+﻿namespace QRGeneratorApp.Core.Common.Exceptions
 {
-    public class QRCodeException: Exception
+    public class QRCodeException : Exception
     {
     }
 }

@@ -22,8 +22,8 @@ namespace QRCodeGeneratorApp.Api.CustomMiddleware.Implementations
         {
             //Shall be the same instance as "service" from constructor
             var service2 = context.RequestServices.GetRequiredService<IMyCustomMiddlewareScopedService>();
-            
-            var areTheSame  = service.GetInstanceId() == service2.GetInstanceId();
+
+            var areTheSame = service.GetInstanceId() == service2.GetInstanceId();
 
 
             await next(context);

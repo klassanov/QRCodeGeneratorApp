@@ -4,7 +4,7 @@ namespace QRCodeGeneratorApp.Api.Healthcheck.Checks
 {
     public class StartupHealthCheck : IHealthCheck
     {
-        private bool isCompleted;      
+        private bool isCompleted;
 
         public void SignaStartupCompleted()
         {

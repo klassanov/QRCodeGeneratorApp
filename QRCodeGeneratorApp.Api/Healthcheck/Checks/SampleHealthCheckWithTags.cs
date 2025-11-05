@@ -11,7 +11,7 @@ namespace QRCodeGeneratorApp.Api.Healthcheck.Checks
             bool isHealthy = Random.Shared.NextSingle() > 0.5;
 
             return isHealthy
-                ? Task.FromResult(HealthCheckResult.Healthy("A healthy result with tags")) 
+                ? Task.FromResult(HealthCheckResult.Healthy("A healthy result with tags"))
                 : Task.FromResult(HealthCheckResult.Unhealthy());
         }
     }

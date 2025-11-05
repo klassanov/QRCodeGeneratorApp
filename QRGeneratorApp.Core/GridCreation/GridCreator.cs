@@ -2,7 +2,7 @@
 
 namespace QRGeneratorApp.Core.GridCreation
 {
-    internal class GridCreator: IGridCreator
+    internal class GridCreator : IGridCreator
     {
         private readonly GridConfig config;
 

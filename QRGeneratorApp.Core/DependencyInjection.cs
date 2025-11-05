@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
-using QRGeneratorApp.Core.ClientRequests.Get;
+﻿using Microsoft.Extensions.DependencyInjection;
 using QRGeneratorApp.Core.Common.Mediator;
 using QRGeneratorApp.Core.GridCreation;
 using QRGeneratorApp.Core.QRMapCreation;

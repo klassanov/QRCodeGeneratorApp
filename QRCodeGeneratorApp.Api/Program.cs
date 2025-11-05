@@ -1,12 +1,11 @@
 using Carter;
 using Microsoft.OpenApi.Models;
-using QRCodeGeneratorApp.Api.ExceptionHandling;
-using QRCodeGeneratorApp.Api.StartupTasks;
-using Scalar.AspNetCore;
-using QRGeneratorApp.Core;
-using QRCodeGeneratorApp.Api.Healthcheck;
 using QRCodeGeneratorApp.Api.CustomMiddleware;
-using QRCodeGeneratorApp.Api.CustomMiddleware.CustomMiddlewareServices;
+using QRCodeGeneratorApp.Api.ExceptionHandling;
+using QRCodeGeneratorApp.Api.Healthcheck;
+using QRCodeGeneratorApp.Api.StartupTasks;
+using QRGeneratorApp.Core;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +23,7 @@ builder.Services.AddOpenApi(options =>
             Email = "test@test.com",
             Url = new Uri("https://test.com")
         };
-        document.Info.License = new OpenApiLicense 
+        document.Info.License = new OpenApiLicense
         {
             Name = "MIT License",
             Url = new Uri("https://opensource.org/licenses/MIT")

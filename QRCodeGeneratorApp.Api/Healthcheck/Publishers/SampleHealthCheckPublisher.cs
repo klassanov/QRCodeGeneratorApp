@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace QRCodeGeneratorApp.Api.Healthcheck.Publishers
 {
@@ -7,7 +6,7 @@ namespace QRCodeGeneratorApp.Api.Healthcheck.Publishers
     {
         //Simple implementation that writes health check results to the console
         //Can be published everywhere
-        
+
         //AspNetCore.Diagnostics.HealthChecks:
 
         //Includes publishers for several systems, including Application Insights.

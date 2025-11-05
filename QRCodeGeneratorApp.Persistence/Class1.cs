@@ -1,13 +1,12 @@
-﻿using System.Text.Json;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Bson;
 
 namespace QRCodeGeneratorApp.Persistence
 {
     public class Class1
     {
         public void Test()
-        {         
+        {
 
             const string connectionUri = "mongodb+srv://klassanov:<db_password>@cluster0.vguqsii.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 

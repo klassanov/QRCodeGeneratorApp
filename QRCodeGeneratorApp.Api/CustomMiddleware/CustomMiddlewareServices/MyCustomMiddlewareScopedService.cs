@@ -5,7 +5,7 @@
         string GetInstanceId();
     }
 
-    public class MyCustomMiddlewareScopedService: IMyCustomMiddlewareScopedService
+    public class MyCustomMiddlewareScopedService : IMyCustomMiddlewareScopedService
     {
         private readonly string _instanceId;
 
