@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <!--Used Directory.Build.props file-->
+    <!--<TargetFramework>net9.0</TargetFramework>-->
+    <!--<Nullable>enable</Nullable>-->
+    <!--<ImplicitUsings>enable</ImplicitUsings>-->
     <UserSecretsId>c0ef39bd-fdc3-47e8-baf4-c0f58ecbd39f</UserSecretsId>
   </PropertyGroup>
 

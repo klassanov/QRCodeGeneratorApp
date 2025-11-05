@@ -1,0 +1,8 @@
+<Project>
+   <PropertyGroup>
+     <!--<OutDir>C:\temp\$(MSBuildProjectName)</OutDir>-->
+     <TargetFramework>net9.0</TargetFramework>
+     <Nullable>enable</Nullable>
+     <ImplicitUsings>enable</ImplicitUsings>
+   </PropertyGroup>
+</Project>
