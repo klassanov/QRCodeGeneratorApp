@@ -5,4 +5,34 @@
      <Nullable>enable</Nullable>
      <ImplicitUsings>enable</ImplicitUsings>
    </PropertyGroup>
+
+
+
+  <!--
+  We have built-in static code analyzers, but we use additionally 
+  SonarAnalyzer.CSharp, which contains additional code analyzers to help us write clean, safe, and reliable code.
+  Static code analysisSonar Qube Settings + editorconfig settings
+  It reads the rules from editorconfig
+  Reference: https://www.milanjovanovic.tech/blog/improving-code-quality-in-csharp-with-static-code-analysis  
+  Add include statement here centrally instead of in each project => using the Central Package Management + Directory.Build.Props
+  Condition: it is not a docker compose project-->
+  
+  <ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+    <PackageReference Include="SonarAnalyzer.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>
+        runtime; build; native; contentfiles; analyzers; buildtransitive
+      </IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!--Settings for all the projects in the directory settings => this matters for analysis-->
+  <PropertyGroup>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>All</AnalysisMode>
+    <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  
 </Project>
