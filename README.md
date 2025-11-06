@@ -2,8 +2,12 @@
 Initially started as a QR code generator app for personal use, but later decided to use it also as a playground
 for experimenting with some concepts/small building blocks and libraries in .NET.
 
-### Builds
-- Main Pipeline Latest Build Status [![Build Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=master)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=master)
+| Builds |
+| :----------- |:--------------:| -------------:|
+| [![Main Branch Build](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=master&label=main%20branch%20build)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=master)
+| TODO      | 
+
+
 
 ## List of Experiments/Features
 
