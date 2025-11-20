@@ -1,5 +1,5 @@
 using Carter;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using QRCodeGeneratorApp.Api.CustomMiddleware;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.Healthcheck;
