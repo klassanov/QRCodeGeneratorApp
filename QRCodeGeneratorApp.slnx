@@ -1,0 +1,16 @@
+<!--Generated with dotent sln migrate command-->
+<Solution>
+  <Folder Name="/azure-pipelines/">
+    <File Path="azure-pipelines/main-build-pipeline.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="QRCodeGeneratorApp.Api/QRCodeGeneratorApp.Api.csproj" />
+  <Project Path="QRCodeGeneratorApp.Console/QRCodeGeneratorApp.Console.csproj" />
+  <Project Path="QRCodeGeneratorApp.Persistence/QRCodeGeneratorApp.Persistence.csproj" />
+  <Project Path="QRGeneratorApp.Core/QRGeneratorApp.Core.csproj" />
+</Solution>
