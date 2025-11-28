@@ -13,5 +13,5 @@
     <PackageReference Include="Scrutor" />
     <PackageReference Include="SkiaSharp" />
   </ItemGroup>
-  
+
 </Project>
