@@ -239,7 +239,7 @@ public static class HealthCheckExtensions
         });
 
 
-        ///healthchecks-ui
+        //healthchecks-ui
         app.UseRouting()
            .UseEndpoints(config => config.MapHealthChecksUI());
 
