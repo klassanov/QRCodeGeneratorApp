@@ -8,7 +8,8 @@ namespace QRCodeGeneratorApp.Api.Healthcheck.Checks
 
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Task.FromResult(HealthCheckResult.Healthy());
         }
     }
 }

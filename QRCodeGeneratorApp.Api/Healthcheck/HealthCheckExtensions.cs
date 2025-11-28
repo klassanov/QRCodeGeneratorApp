@@ -38,7 +38,7 @@ public static class HealthCheckExtensions
 
         //Lambda function that returns always healthy result
         healthcheckBuilder.AddCheck(
-            name: "self",
+            name: "api-self",
             check: () =>
             {
                 return HealthCheckResult.Degraded();
@@ -238,6 +238,8 @@ public static class HealthCheckExtensions
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 
+
+        ///healthchecks-ui
         app.UseRouting()
            .UseEndpoints(config => config.MapHealthChecksUI());
 

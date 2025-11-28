@@ -10,7 +10,7 @@ using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 //TODO: Duplicated health checks registration, remove one of them after investigation
-//builder.AddServiceDefaults();
+builder.AddServiceDefaults();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
