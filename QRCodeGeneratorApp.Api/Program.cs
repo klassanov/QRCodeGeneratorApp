@@ -9,6 +9,9 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//TODO: Duplicated health checks registration, remove one of them after investigation
+//builder.AddServiceDefaults();
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi(options =>
@@ -60,6 +63,8 @@ builder.Services.AddCustomMiddleware();
 
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 //Use custom global exception handling
 app.UseExceptionHandler();
