@@ -1,7 +1,16 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.QRCodeGeneratorApp_Api>("qrcodegeneratorapp-api");
-    
+
+var mongoServer = builder.AddMongoDB("mongodb-server").WithLifetime(ContainerLifetime.Persistent)
+                         .WithMongoExpress().WithLifetime(ContainerLifetime.Persistent);
+
+var mongoDb = mongoServer.AddDatabase("qrcodegeneratorapp-db");
+
+
+builder.AddProject<Projects.QRCodeGeneratorApp_Api>("qrcodegeneratorapp-api")
+       .WithReference(mongoDb)
+       .WaitFor(mongoDb);
+
 
 
 

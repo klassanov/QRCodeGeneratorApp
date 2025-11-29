@@ -1,6 +1,10 @@
 <Project Sdk="Aspire.AppHost.Sdk/13.0.0">
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.MongoDB" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\QRCodeGeneratorApp.Api\QRCodeGeneratorApp.Api.csproj" />
     <ProjectReference Include="..\QRCodeGeneratorApp.Console\QRCodeGeneratorApp.Console.csproj" />
   </ItemGroup>
