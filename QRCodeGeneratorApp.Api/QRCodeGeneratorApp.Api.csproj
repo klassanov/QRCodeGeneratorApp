@@ -28,7 +28,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" VersionOverride="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QRCodeGeneratorApp.Persistence\QRCodeGeneratorApp.Persistence.csproj" />
     <ProjectReference Include="..\QRGeneratorApp.Core\QRGeneratorApp.Core.csproj" />
+    <ProjectReference Include="..\QRCodeGeneratorApp.ServiceDefaults\QRCodeGeneratorApp.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

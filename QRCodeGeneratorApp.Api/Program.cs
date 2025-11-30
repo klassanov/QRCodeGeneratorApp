@@ -4,10 +4,14 @@ using QRCodeGeneratorApp.Api.CustomMiddleware;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.Healthcheck;
 using QRCodeGeneratorApp.Api.StartupTasks;
+using QRCodeGeneratorApp.Persistence;
 using QRGeneratorApp.Core;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//TODO: Duplicated health checks registration, remove one of them after investigation
+builder.AddServiceDefaults();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -58,8 +62,13 @@ builder.Services.RegisterCoreServices();
 
 builder.Services.AddCustomMiddleware();
 
+builder.Services.RegisterPersistenceServices();
+
+builder.RegisterMongoDbClient();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 //Use custom global exception handling
 app.UseExceptionHandler();

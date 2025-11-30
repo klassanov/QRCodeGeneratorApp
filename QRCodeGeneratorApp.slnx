@@ -10,7 +10,9 @@
     <File Path="README.md" />
   </Folder>
   <Project Path="QRCodeGeneratorApp.Api/QRCodeGeneratorApp.Api.csproj" />
+  <Project Path="QRCodeGeneratorApp.AppHost/QRCodeGeneratorApp.AppHost.csproj" />
   <Project Path="QRCodeGeneratorApp.Console/QRCodeGeneratorApp.Console.csproj" />
   <Project Path="QRCodeGeneratorApp.Persistence/QRCodeGeneratorApp.Persistence.csproj" />
+  <Project Path="QRCodeGeneratorApp.ServiceDefaults/QRCodeGeneratorApp.ServiceDefaults.csproj" />
   <Project Path="QRGeneratorApp.Core/QRGeneratorApp.Core.csproj" />
 </Solution>
