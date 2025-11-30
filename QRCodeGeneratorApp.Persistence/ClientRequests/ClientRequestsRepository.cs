@@ -15,12 +15,20 @@ namespace QRCodeGeneratorApp.Persistence.ClientRequests
 
         public async Task<GetClientRequestResult> GetById(Guid id)
         {
-            return new GetClientRequestResult(
+            var dbList = await mongoClient.ListDatabaseNamesAsync();
+            foreach (var db in await dbList.ToListAsync())
+            {
+                Console.WriteLine(db);
+            }
+
+            
+
+                return await Task.FromResult( new GetClientRequestResult(
                  Id: id,
                  ClientName: "Test Client",
                  RequestedText: "Test Text",
                  RequestTime: DateTime.UtcNow
-             );
+             ));
         }
     }
 }

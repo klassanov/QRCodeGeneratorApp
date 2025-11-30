@@ -16,14 +16,24 @@ namespace QRGeneratorApp.Core.ClientRequests.Get
 
     public class GetGlientRequestHandler : IQueryHandler<GetClientRequestQuery, GetClientRequestResult>
     {
-        public Task<GetClientRequestResult> Handle(GetClientRequestQuery query)
+        private readonly IClientRequestsRepository clientRequestsRepository;
+
+        public GetGlientRequestHandler(IClientRequestsRepository clientRequestsRepository)
         {
-            return Task.FromResult(new GetClientRequestResult(
-                Id: query.Id,
-                ClientName: "Test Client",
-                RequestedText: "Test Text",
-                RequestTime: DateTime.UtcNow
-            ));
+            this.clientRequestsRepository = clientRequestsRepository;
+        }
+
+        public async Task<GetClientRequestResult> Handle(GetClientRequestQuery query)
+        {
+
+            return await clientRequestsRepository.GetById(query.Id);
+
+            //return Task.FromResult(new GetClientRequestResult(
+            //    Id: query.Id,
+            //    ClientName: "Test Client",
+            //    RequestedText: "Test Text",
+            //    RequestTime: DateTime.UtcNow
+            //));
         }
     }
 }
