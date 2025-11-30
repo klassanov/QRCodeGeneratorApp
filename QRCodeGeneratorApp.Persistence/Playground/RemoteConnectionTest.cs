@@ -8,7 +8,8 @@
 //        public void Test()
 //        {
 
-//            const string connectionUri = "mongodb+srv://klassanov:<db_password>@cluster0.vguqsii.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+//            Look at the secrets file
+//            const string connectionUri = "";
 
 //            var settings = MongoClientSettings.FromConnectionString(connectionUri);
 
