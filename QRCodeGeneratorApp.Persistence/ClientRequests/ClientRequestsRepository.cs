@@ -1,10 +1,10 @@
 ﻿using MongoDB.Driver;
-using QRGeneratorApp.Core.ClientRequests;
-using QRGeneratorApp.Core.ClientRequests.Get;
+using QRGeneratorApp.Core.Orders;
+using QRGeneratorApp.Core.Orders.GetById;
 
 namespace QRCodeGeneratorApp.Persistence.ClientRequests
 {
-    public class ClientRequestsRepository : IClientRequestsRepository
+    public class ClientRequestsRepository : IOrdersRepository
     {
         private readonly IMongoClient mongoClient;
 
@@ -13,7 +13,7 @@ namespace QRCodeGeneratorApp.Persistence.ClientRequests
             this.mongoClient = mongoClient;
         }
 
-        public async Task<GetClientRequestResult> GetById(Guid id)
+        public async Task<GetOrderByIdResult> GetById(Guid id)
         {
             var dbList = await mongoClient.ListDatabaseNamesAsync();
             foreach (var db in await dbList.ToListAsync())
@@ -23,7 +23,7 @@ namespace QRCodeGeneratorApp.Persistence.ClientRequests
 
             
 
-                return await Task.FromResult( new GetClientRequestResult(
+                return await Task.FromResult( new GetOrderByIdResult(
                  Id: id,
                  ClientName: "Test Client",
                  RequestedText: "Test Text",

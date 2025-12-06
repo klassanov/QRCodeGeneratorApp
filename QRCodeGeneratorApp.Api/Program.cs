@@ -5,6 +5,7 @@ using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.Healthcheck;
 using QRCodeGeneratorApp.Api.StartupTasks;
 using QRCodeGeneratorApp.Persistence;
+using QRCodeGeneratorApp.ServiceDefaults;
 using QRGeneratorApp.Core;
 using Scalar.AspNetCore;
 

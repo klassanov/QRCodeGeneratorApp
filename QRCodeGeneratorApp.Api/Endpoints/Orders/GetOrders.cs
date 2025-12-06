@@ -1,17 +1,17 @@
 ﻿using Carter;
 using Microsoft.AspNetCore.Mvc;
-using QRGeneratorApp.Core.ClientRequests.Get;
 using QRGeneratorApp.Core.Common.Mediator;
+using QRGeneratorApp.Core.Orders.GetById;
 
 namespace QRCodeGeneratorApp.Api.Endpoints.ClientRequests
 {
-    public class GetClientRequest : ICarterModule
+    public class GetOrders : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/clientrequests/{id:guid}", async (Guid id, [FromServices] IQueryHandler<GetClientRequestQuery, GetClientRequestResult> queryHandler) =>
+            app.MapGet("/orders/{id:guid}", async (Guid id, [FromServices] IQueryHandler<GetOrderByIdQuery, GetOrderByIdResult> queryHandler) =>
             {
-                var query = new GetClientRequestQuery(id);
+                var query = new GetOrderByIdQuery(id);
                 var result = await queryHandler.Handle(query);
                 return Results.Ok(result);
             });
