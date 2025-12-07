@@ -4,7 +4,7 @@ namespace QRCodeGeneratorApp.Persistence.Common
 {
     public abstract class MongoRepository<T> where T : class
     {
-        protected const string dbName = "qrcodegeneratorapp-db";
+        public const string DatabaseName = "qrcodegeneratorapp-db";
 
         protected readonly IMongoClient mongoClient;
 
@@ -15,7 +15,7 @@ namespace QRCodeGeneratorApp.Persistence.Common
         protected MongoRepository(IMongoClient mongoClient)
         {
             this.mongoClient = mongoClient;
-            this.dbCollection = this.mongoClient.GetDatabase(dbName).GetCollection<T>(collectionName);
+            this.dbCollection = this.mongoClient.GetDatabase(DatabaseName).GetCollection<T>(collectionName);
         }
     }
 }

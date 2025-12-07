@@ -5,6 +5,7 @@ using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.Healthcheck;
 using QRCodeGeneratorApp.Api.StartupTasks;
 using QRCodeGeneratorApp.Persistence;
+using QRCodeGeneratorApp.Persistence.DataSeeding;
 using QRCodeGeneratorApp.ServiceDefaults;
 using QRGeneratorApp.Core;
 using Scalar.AspNetCore;
@@ -68,6 +69,9 @@ builder.Services.RegisterPersistenceServices();
 builder.RegisterMongoDbClient();
 
 var app = builder.Build();
+
+//Data seeding if necessary
+app.Services.SeedOrders();
 
 app.MapDefaultEndpoints();
 
