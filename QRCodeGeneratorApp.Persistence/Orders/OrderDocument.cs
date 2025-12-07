@@ -25,9 +25,6 @@ namespace QRCodeGeneratorApp.Persistence.Orders
 
         public DateTime CreatedAt { get; set; }
 
-
-        public static implicit operator GetOrderByIdResult(OrderDocument orderDocument) => new GetOrderByIdResult(orderDocument.Id.ToString(), orderDocument.CustomerName!, orderDocument.Text!, orderDocument.CreatedAt);
-        
-
+        // public static implicit operator GetOrderByIdResult(OrderDocument orderDocument) => new GetOrderByIdResult(orderDocument.Id.ToString(), orderDocument.CustomerName!, orderDocument.Text!, orderDocument.CreatedAt);
     }
 }

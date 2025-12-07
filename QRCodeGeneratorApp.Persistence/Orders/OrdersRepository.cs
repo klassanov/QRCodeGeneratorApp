@@ -22,7 +22,7 @@ namespace QRCodeGeneratorApp.Persistence.Orders
             if (order is null)
                 return null;
 
-            return order;// new GetOrderByIdResult(id, order.CustomerName!, order.Text!, order.CreatedAt);
+            return order.ToGetOrderByIdResult();
         }
     }
 }
