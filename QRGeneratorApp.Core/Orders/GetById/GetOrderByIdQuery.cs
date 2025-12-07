@@ -2,5 +2,5 @@
 
 namespace QRGeneratorApp.Core.Orders.GetById
 {
-    public record class GetOrderByIdQuery(Guid Id) : IQuery<GetOrderByIdResult>;
+    public record class GetOrderByIdQuery(string Id) : IQuery<GetOrderByIdResult>;
 }

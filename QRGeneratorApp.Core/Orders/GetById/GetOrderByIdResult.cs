@@ -1,9 +1,9 @@
 ﻿namespace QRGeneratorApp.Core.Orders.GetById
 {
     public record class GetOrderByIdResult(
-        Guid Id,
-        string ClientName,
-        string RequestedText,
-        DateTime RequestTime
+        string Id,
+        string CustomerName,
+        string Text,
+        DateTime CreatedAt
     );
 }

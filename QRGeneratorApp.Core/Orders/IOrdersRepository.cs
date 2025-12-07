@@ -7,6 +7,6 @@ namespace QRGeneratorApp.Core.Orders
 {
     public interface IOrdersRepository
     {
-        Task<GetOrderByIdResult> GetById(Guid id);
+        Task<GetOrderByIdResult> GetById(string id);
     }
 }

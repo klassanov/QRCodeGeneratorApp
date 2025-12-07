@@ -4,3 +4,5 @@ GET {{QRCodeGeneratorApp.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{QRCodeGeneratorApp.Api_HostAddress}}/orders/6935e7721801e8ddd3c5282f
+Accept: application/json
