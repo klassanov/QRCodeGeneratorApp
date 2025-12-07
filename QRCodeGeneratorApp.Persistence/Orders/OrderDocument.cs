@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using QRGeneratorApp.Core.Orders.GetById;
 
 namespace QRCodeGeneratorApp.Persistence.Orders
 {
@@ -23,6 +24,10 @@ namespace QRCodeGeneratorApp.Persistence.Orders
         public string? CustomerEmail { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+
+        public static implicit operator GetOrderByIdResult(OrderDocument orderDocument) => new GetOrderByIdResult(orderDocument.Id.ToString(), orderDocument.CustomerName!, orderDocument.Text!, orderDocument.CreatedAt);
+        
 
     }
 }

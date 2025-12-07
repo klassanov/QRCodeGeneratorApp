@@ -1,33 +1,28 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using QRCodeGeneratorApp.Persistence.Common;
 using QRGeneratorApp.Core.Orders;
 using QRGeneratorApp.Core.Orders.GetById;
 
 namespace QRCodeGeneratorApp.Persistence.Orders
 {
-    public class OrdersRepository : IOrdersRepository
+    public class OrdersRepository : MongoRepository<OrderDocument>, IOrdersRepository
     {
-        private readonly IMongoClient mongoClient;
+        protected override string collectionName => "orders";
+        
+        public OrdersRepository(IMongoClient mongoClient): base(mongoClient) { }
 
-        public OrdersRepository(IMongoClient mongoClient)
-        {
-            this.mongoClient = mongoClient;
-        }
-
-        public async Task<GetOrderByIdResult> GetById(string id)
+        public async Task<GetOrderByIdResult?> GetById(string id)
         {
             if(!ObjectId.TryParse(id, out var orderId)) 
                 return null;
 
-            var db = mongoClient.GetDatabase("qrcodegeneratorapp-db");
-            var collection = db.GetCollection<OrderDocument>("orders");
-
-            var order = await collection.Find(Builders<OrderDocument>.Filter.Eq(doc => doc.Id, orderId)).SingleOrDefaultAsync();
+            var order = await dbCollection.Find(Builders<OrderDocument>.Filter.Eq(doc => doc.Id, orderId)).SingleOrDefaultAsync();
 
             if (order is null)
                 return null;
 
-            return new GetOrderByIdResult(id, order.CustomerName!, order.Text!, order.CreatedAt);
+            return order;// new GetOrderByIdResult(id, order.CustomerName!, order.Text!, order.CreatedAt);
         }
     }
 }
