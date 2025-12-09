@@ -1,6 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-//var builder = Host.CreateDefaultBuilder(args);
+using Microsoft.Extensions.Hosting;
+
+var builder = Host.CreateDefaultBuilder(args).ConfigureServices(services =>
+{
+
+});
 
 
-Console.WriteLine("Hello, World!");
+var app = builder.Build();
+
