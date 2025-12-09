@@ -11,6 +11,7 @@
   </Folder>
   <Project Path="QRCodeGeneratorApp.Api/QRCodeGeneratorApp.Api.csproj" />
   <Project Path="QRCodeGeneratorApp.AppHost/QRCodeGeneratorApp.AppHost.csproj" />
+  <Project Path="QRCodeGeneratorApp.BackgroundJobScheduler/QRCodeGeneratorApp.BackgroundJobScheduler.csproj" Id="b6202e74-b9c6-4ee3-a471-70eb1945de08" />
   <Project Path="QRCodeGeneratorApp.Console/QRCodeGeneratorApp.Console.csproj" />
   <Project Path="QRCodeGeneratorApp.Persistence/QRCodeGeneratorApp.Persistence.csproj" />
   <Project Path="QRCodeGeneratorApp.ServiceDefaults/QRCodeGeneratorApp.ServiceDefaults.csproj" />
