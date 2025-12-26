@@ -25,12 +25,6 @@ steps:
     echo "nugetPackageVersion = $(nugetPackageVersion)"
   displayName: print nugetPackageVersion
 
-- script: |
-    DATE=$(date +%Y%m%d)
-    REV=$(Build.BuildId)
-    echo "##vso[task.setvariable variable=PackageVersion]$DATE.$REV"
-    echo "PackageVersion = $(PackageVersion)"
-
 - task: DotNetCoreCLI@2
   displayName: dotnet build solution
   inputs:
