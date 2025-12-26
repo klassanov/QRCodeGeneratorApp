@@ -17,13 +17,13 @@ variables:
   solution: '**/*.slnx'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  nugetPackageVersion: '$(Date:yyyyMMdd).$(Rev:r)'
 
 steps:
 
 - script: |
-    echo "##vso[build.updatebuildnumber]$(Date:yyyyMMdd).$(Rev:r)"
-  displayName: 'Set NuGet packages version'
-
+    echo "nugetPackageVersion = $(nugetPackageVersion)"
+  displayName: print nugetPackageVersion
 
 - task: DotNetCoreCLI@2
   displayName: dotnet build solution
@@ -36,9 +36,9 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/QRCodeGeneratorApp.Helper.csproj'
-    packDirectory: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages'
-    arguments:  '/p:Version=$(Date:yyyyMMdd).$(Build.BuildId)'
-      
+    packDirectory: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages'  
+    versioningScheme: byEnvVar
+    versionEnvVar: nugetPackageVersion
 
 - task: DotNetCoreCLI@2
   displayName: donet push custom nuget packages
