@@ -26,11 +26,12 @@ steps:
     command: 'build'
     configuration: '$(buildConfiguration)'
     
-- task: NuGetCommand@2
-  displayName: nuget pack QRCodeGeneratorApp.Helper
+- task: DotNetCoreCLI@2
+  displayName: dotent pack QRCodeGeneratorApp.Helper.csproj
   inputs:
     command: 'pack'
-    packagesToPack: '**\QRCodeGeneratorApp.Helper.csproj'
-    packDestination: '$(Build.ArtifactStagingDirectory)\custom-packages'
+    packagesToPack: '**/QRCodeGeneratorApp.Helper.csproj'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages'
     versioningScheme: 'off'
+
 
