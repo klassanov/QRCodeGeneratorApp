@@ -32,11 +32,11 @@ steps:
     command: 'pack'
     packagesToPack: '**/QRCodeGeneratorApp.Helper.csproj'
     packDirectory: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages'
-    versioningScheme: 'off'
-
+    versioningScheme: 'byBuildNumber'
+      
 
 - task: DotNetCoreCLI@2
-  displayName: donet nuget push custom nuget packages
+  displayName: donet push custom nuget packages
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages/*.nupkg'
