@@ -34,7 +34,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/QRCodeGeneratorApp.Helper.csproj'
     packDirectory: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages'
-    versioningScheme: 'byBuildNumber'
+    arguments:  '/p:Version=$(Date:yyyyMMdd).$(Build.BuildId)'
       
 
 - task: DotNetCoreCLI@2
