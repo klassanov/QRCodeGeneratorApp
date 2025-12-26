@@ -18,9 +18,12 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-name: $(Date:yyyy).$(Date:MM).$(Date:dd).$(Rev:r)
-
 steps:
+
+- script: |
+    echo "##vso[build.updatebuildnumber]$(Date:yyyyMMdd).$(Rev:r)"
+  displayName: 'Set NuGet packages version'
+
 
 - task: DotNetCoreCLI@2
   displayName: dotnet build solution
