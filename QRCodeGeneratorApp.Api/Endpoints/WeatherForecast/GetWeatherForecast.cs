@@ -1,4 +1,5 @@
 ﻿using Carter;
+using QRCodeGeneratorApp.Helper;
 
 namespace QRCodeGeneratorApp.Api.Endpoints.WeatherForecast
 {
@@ -22,7 +23,7 @@ namespace QRCodeGeneratorApp.Api.Endpoints.WeatherForecast
                     new WeatherForecast
                     (
                         DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                        Random.Shared.Next(-20, 55),
+                        Utilities.GenerateRandomNumber(-20, 55),    // Use helper nuhget package
                         summaries[Random.Shared.Next(summaries.Length)]
                     ))
                     .ToArray();
