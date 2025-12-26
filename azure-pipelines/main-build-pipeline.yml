@@ -18,6 +18,8 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+name: $(Date:yyyy).$(Date:MM).$(Date:dd).$(Rev:r)
+
 steps:
 
 - task: DotNetCoreCLI@2
