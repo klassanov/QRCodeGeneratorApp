@@ -25,4 +25,6 @@ steps:
   inputs:
     command: 'build'
     configuration: '$(buildConfiguration)'
+    projects: 'QRCodeGeneratorApp.slnx'
+    
 
