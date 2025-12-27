@@ -37,8 +37,7 @@ steps:
     versionEnvVar: nugetPackageVersion
 
 
-- task: DotNetCoreCLI@2
-  condition: false
+- task: DotNetCoreCLI@2 
   displayName: donet push custom nuget packages
   inputs:
     command: 'push'
