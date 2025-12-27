@@ -1,8 +1,9 @@
 <!--Generated with dotent sln migrate command-->
 <Solution>
   <Folder Name="/azure-pipelines/">
-    <File Path="azure-pipelines/main-build-pipeline.yml" />
-    <File Path="azure-pipelines/nuget-pipeline.yml" />
+    <File Path="azure-pipelines/master-pipeline.yml" />
+    <File Path="azure-pipelines/qrcodegeneratorapp-ci-cd.yml" />
+    <File Path="azure-pipelines/qrcodegeneratorapp-nuget.yml" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
