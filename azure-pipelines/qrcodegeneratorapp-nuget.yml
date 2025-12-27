@@ -12,7 +12,10 @@ pool:
 variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  nugetPackageVersion: '1.0.12'
+  currentDate: $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
+  majorVersion: '1'
+  minorVersion: '0'  
+  nugetPackageVersion: '$(majorVersion).$(minorVersion).$(currentDate)'
 
 steps:
 
