@@ -14,14 +14,16 @@ variables:
   buildConfiguration: 'Release'
   currentDate: $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   majorVersion: '1'
-  minorVersion: '0'  
+  minorVersion: '0'
+  sourceRevision: '$(Build.SourceVersion)'
   nugetPackageVersion: '$(majorVersion).$(minorVersion).$(currentDate)'
 
 steps:
 
 - script: |
     echo "nugetPackageVersion = $(nugetPackageVersion)"
-  displayName: print nugetPackageVersion
+    echo "sourceRevision = $(sourceRevision)"
+  displayName: print variables
 
     
 - task: DotNetCoreCLI@2
