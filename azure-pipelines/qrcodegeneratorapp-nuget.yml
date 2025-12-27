@@ -13,16 +13,17 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   currentDate: $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
-  majorVersion: '1'
-  minorVersion: '0'
-  sourceRevision: '$(Build.SourceVersion)'
-  nugetPackageVersion: '$(majorVersion).$(minorVersion).$(currentDate)'
+  majorVersion: 1
+  minorVersion: 1
+  patchVersion: $[counter(variables['major'], 100)]  
+  nugetPackageVersion: '$(majorVersion).$(minorVersion).$(patchVersion)'
 
 steps:
 
 - script: |
+    echo "currentDate = $(currentDate)"
+    echo "patchVersion = $(patchVersion)"
     echo "nugetPackageVersion = $(nugetPackageVersion)"
-    echo "sourceRevision = $(sourceRevision)"
   displayName: print variables
 
     
