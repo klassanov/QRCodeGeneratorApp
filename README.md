@@ -4,8 +4,8 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 
 | Builds |
 | :----------- |
-| [![QRCodeGeneratorApp-CI-CD Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=master&label=main%20branch%20build)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=master) |
-| [![QRCodeGeneratorApp-Nuget Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2FQRCodeGeneratorApp-Nuget?branchName=master)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=29&branchName=master) | 
+| [![QRCodeGeneratorApp-CI-CD Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=master&label=QRCodeGeneratorApp-CI-CD%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=master) |
+| [![QRCodeGeneratorApp-Nuget Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2FQRCodeGeneratorApp-Nuget?branchName=master&label=QRCodeGeneratorApp-Nuget%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=29&branchName=master) | 
 
 
 
