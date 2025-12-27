@@ -32,12 +32,11 @@ steps:
 
 
 - task: DotNetCoreCLI@2
+  condition: false
   displayName: donet push custom nuget packages
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/custom-nuget-packages/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'c096b3b9-a525-4ae1-b0d5-2764415d837a/78d4438d-26e2-4ef4-b3c5-f432fb3ae273'
-    arguments:  '--skip-duplicate'
-
 
