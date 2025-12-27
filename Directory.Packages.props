@@ -17,7 +17,7 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
     <PackageVersion Include="Net.Codecrete.QrCodeGenerator" Version="2.0.7" />
-    <PackageVersion Include="QRCodeGeneratorApp.Helper" Version="1.0.0" />
+    <PackageVersion Include="QRCodeGeneratorApp.Helper" Version="1.0.12" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.11.1" />
     <PackageVersion Include="Scrutor" Version="7.0.0" />
     <PackageVersion Include="SkiaSharp" Version="3.119.1" />
