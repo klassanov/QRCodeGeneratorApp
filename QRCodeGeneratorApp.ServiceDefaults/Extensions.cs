@@ -4,8 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
@@ -51,6 +51,10 @@ public static class Extensions
         {
             logging.IncludeFormattedMessage = true;
             logging.IncludeScopes = true;
+
+            //Explicitly added later for expoporting logs to OTLP endpoint if configured
+            //This is signal-specific (for logs only) and cannot be used if the cross-cutting UseOtlpExporter() is used
+            //logging.AddOtlpExporter();
         });
 
         builder.Services.AddOpenTelemetry()
@@ -59,6 +63,10 @@ public static class Extensions
                 metrics.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddRuntimeInstrumentation();
+
+                //Explicitly added later for expoporting traces to OTLP endpoint if configured
+                //This is signal-specific (for metrics only) and cannot be used if the cross-cutting UseOtlpExporter() is used
+                //metrics.AddOtlpExporter();
             })
             .WithTracing(tracing =>
             {
@@ -72,6 +80,11 @@ public static class Extensions
                     // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
                     //.AddGrpcClientInstrumentation()
                     .AddHttpClientInstrumentation();
+
+
+                //Explicitly added later for expoporting traces to OTLP endpoint if configured
+                //This is signal-specific (for traces only) and cannot be used if the cross-cutting UseOtlpExporter() is used
+                //tracing.AddOtlpExporter();
             });
 
         builder.AddOpenTelemetryExporters();
@@ -85,6 +98,7 @@ public static class Extensions
 
         if (useOtlpExporter)
         {
+            //Use Oltp exporter for logs, metrics, and traces:for all signals, it is cross-cutting
             builder.Services.AddOpenTelemetry().UseOtlpExporter();
         }
 
