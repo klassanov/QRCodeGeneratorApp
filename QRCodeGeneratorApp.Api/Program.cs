@@ -1,9 +1,10 @@
 using Carter;
 using Microsoft.OpenApi;
+using QRCodeGeneratorApp.Api.BackgroundTasks;
 using QRCodeGeneratorApp.Api.CustomMiddleware;
 using QRCodeGeneratorApp.Api.ExceptionHandling;
 using QRCodeGeneratorApp.Api.Healthcheck;
-using QRCodeGeneratorApp.Api.StartupTasks;
+using QRCodeGeneratorApp.Infrastructure;
 using QRCodeGeneratorApp.Persistence;
 using QRCodeGeneratorApp.Persistence.DataSeeding;
 using QRCodeGeneratorApp.ServiceDefaults;
@@ -59,12 +60,17 @@ builder.Services.RegisterHealthChecks(builder.Configuration);
 //Long-running startup task
 builder.Services.AddHostedService<StartupBackgroundService>();
 
+//Background service to simulate order placements
+builder.Services.AddHostedService<OrderPlacementBackgroundService>();
+
 //Register services from the Core project
 builder.Services.RegisterCoreServices();
 
 builder.Services.AddCustomMiddleware();
 
 builder.Services.RegisterPersistenceServices();
+
+builder.Services.RegisterInfrastructureServices();
 
 builder.RegisterMongoDbClient();
 
