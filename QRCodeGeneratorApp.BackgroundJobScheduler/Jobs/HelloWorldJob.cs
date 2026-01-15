@@ -7,7 +7,7 @@ namespace QRCodeGeneratorApp.BackgroundJobScheduler.Jobs
 {
     public class HelloWorldJob
     {
-        [TickerFunction("HelloWorldFunction")]
+        [TickerFunction(nameof(HelloWorldJob))]
         public async Task HelloWorld(TickerFunctionContext context, CancellationToken cancellationToken)
         {
             Console.WriteLine("Hello, World!");
