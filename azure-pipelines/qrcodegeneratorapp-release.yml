@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
+- release/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,6 +24,7 @@ steps:
     echo "currentDate = $(currentDate)"
     echo "patchVersion = $(patchVersion)"
     echo "nugetPackageVersion = $(nugetPackageVersion)"
+    echo "tagName" = $(tagName)
   displayName: print variables
 
 
