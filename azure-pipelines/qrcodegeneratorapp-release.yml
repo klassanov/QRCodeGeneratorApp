@@ -5,7 +5,7 @@
 
 trigger: none
 pr: none
-  
+
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -24,15 +24,16 @@ stages:
     displayName: Print variables
     jobs:
       - job: PrintVariablesJob
-        steps:
-        - script: |
-            echo "currentDate = $(currentDate)"
-            echo "patchVersion = $(patchVersion)"
-            echo "nugetPackageVersion = $(nugetPackageVersion)"
+steps:
+
+- script: |
+    echo "currentDate = $(currentDate)"
+    echo "patchVersion = $(patchVersion)"
+    echo "nugetPackageVersion = $(nugetPackageVersion)"
             echo "tagName = $(tagName)"
-          displayName: print variables
+  displayName: print variables
 
-
+   
   - stage: CreateReleaseAndTagStage
     displayName: Create Release and Tag
     jobs:
