@@ -3,6 +3,7 @@
   <Folder Name="/azure-pipelines/">
     <File Path="azure-pipelines/qrcodegeneratorapp-ci-cd.yml" />
     <File Path="azure-pipelines/qrcodegeneratorapp-nuget.yml" />
+    <File Path="azure-pipelines/qrcodegeneratorapp-release.yml" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />

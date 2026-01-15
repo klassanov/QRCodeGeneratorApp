@@ -1,0 +1,29 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  currentDate: $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
+  majorVersion: 1
+  minorVersion: 1
+  patchVersion: $[counter(variables['major'], 100)]  
+  nugetPackageVersion: '$(majorVersion).$(minorVersion).$(patchVersion)'
+
+steps:
+
+- script: |
+    echo "currentDate = $(currentDate)"
+    echo "patchVersion = $(patchVersion)"
+    echo "nugetPackageVersion = $(nugetPackageVersion)"
+  displayName: print variables
+
+   
