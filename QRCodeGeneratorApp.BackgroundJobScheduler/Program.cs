@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using QRCodeGeneratorApp.BackgroundJobScheduler.Jobs;
 using QRCodeGeneratorApp.BackgroundJobScheduler.Scheduling;
 using TickerQ.DependencyInjection;
 
@@ -16,10 +17,14 @@ var app = builder.Build();
 // Middleware registrations
 app.UseTickerQ();
 
+
+//Job Registration
 using (var scope = app.Services.CreateScope())
 {
     var jobScheduler = scope.ServiceProvider.GetRequiredService<IJobScheduler>();
-    var result = await jobScheduler.ScheduleFireAndForgetJob("HelloWorldFunction", DateTime.UtcNow.AddSeconds(10));
+    _ = await jobScheduler.ScheduleFireAndForgetJob(nameof(HelloWorldJob), DateTime.UtcNow.AddSeconds(10));
+
+   _= await jobScheduler.ScheduleRecurringJob(nameof(PublishOrderPlacementJob), "*/1 * * * * *"); // Every 1 minute
 }
 
 
