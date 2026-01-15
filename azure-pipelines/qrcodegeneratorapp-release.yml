@@ -24,7 +24,20 @@ steps:
     echo "currentDate = $(currentDate)"
     echo "patchVersion = $(patchVersion)"
     echo "nugetPackageVersion = $(nugetPackageVersion)"
-    echo "tagName" = $(tagName)
+    echo "tagName = $(tagName)"
   displayName: print variables
+
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'klassanov'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'userSpecifiedTag'
+    tag: '$(tagName)'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
+
+  
 
 
