@@ -38,7 +38,7 @@ stages:
   - stage: CreateReleaseAndTagStage
     displayName: Create Release and Tag
     jobs:
-      - job: CreateReleaseAndTag
+      - job: CreateReleaseAndTagJob
         steps:
           # Creates a release with the specified input parameter $(tagName) and if not exists a tag as well
           - task: GitHubRelease@1
@@ -53,5 +53,11 @@ stages:
               changeLogType: 'commitBased'
 
   
-
-
+  - stage: DeployToProd
+    displayName: Deploy to Production
+    trigger: manual
+    jobs:
+      - job: DeployToProdJob
+        steps:
+          - script: echo "Deployment to prod..."
+            displayName: Run Deployment Script
