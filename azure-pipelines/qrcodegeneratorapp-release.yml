@@ -30,6 +30,7 @@ steps:
     echo "tagName = $(tagName)"
   displayName: print variables
 
+# Creates a release with the specified input parameter $(tagName) and if not exists a tag as well
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'klassanov'
