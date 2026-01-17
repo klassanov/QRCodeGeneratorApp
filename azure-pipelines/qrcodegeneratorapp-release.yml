@@ -18,29 +18,39 @@ variables:
   currentDate: $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
   majorVersion: 1
   minorVersion: 1
-  patchVersion: $[counter(variables['major'], 100)]  
+  patchVersion: $[counter(variables['majorVersion'], 100)]  
   nugetPackageVersion: '$(majorVersion).$(minorVersion).$(patchVersion)'
 
-steps:
+stages: 
+  - stage: PrintVariablesStage
+    displayName: Print variables
+    jobs:
+      - job: PrintVariablesJob
+        steps:
+        - script: |
+            echo "currentDate = $(currentDate)"
+            echo "patchVersion = $(patchVersion)"
+            echo "nugetPackageVersion = $(nugetPackageVersion)"
+            echo "tagName = $(tagName)"
+          displayName: print variables
 
-- script: |
-    echo "currentDate = $(currentDate)"
-    echo "patchVersion = $(patchVersion)"
-    echo "nugetPackageVersion = $(nugetPackageVersion)"
-    echo "tagName = $(tagName)"
-  displayName: print variables
 
-# Creates a release with the specified input parameter $(tagName) and if not exists a tag as well
-- task: GitHubRelease@1
-  inputs:
-    gitHubConnection: 'klassanov'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'create'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
-    tag: '$(tagName)'
-    changeLogCompareToRelease: 'lastFullRelease'
-    changeLogType: 'commitBased'
+  - stage: CreateReleaseAndTagStage
+    displayName: Create Release and Tag
+    jobs:
+      - job: CreateReleaseAndTag
+        steps:
+          # Creates a release with the specified input parameter $(tagName) and if not exists a tag as well
+          - task: GitHubRelease@1
+            inputs:
+              gitHubConnection: 'klassanov'
+              repositoryName: '$(Build.Repository.Name)'
+              action: 'create'
+              target: '$(Build.SourceVersion)'
+              tagSource: 'userSpecifiedTag'
+              tag: '$(tagName)'
+              changeLogCompareToRelease: 'lastFullRelease'
+              changeLogType: 'commitBased'
 
   
 
