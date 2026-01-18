@@ -6,9 +6,8 @@
 trigger:
   branches:
     include:
-      - release/*
-      - feature/release-pipeline
-
+      - main
+      
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -54,8 +53,7 @@ stages:
 
   
   - stage: DeployToProd
-    displayName: Deploy to Production
-    trigger: manual
+    displayName: Deploy to Production   
     jobs:
       - job: DeployToProdJob
         steps:
