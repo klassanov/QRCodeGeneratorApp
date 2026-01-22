@@ -1,0 +1,41 @@
+﻿using Carter;
+using QRCodeGeneratorApp.Helper;
+
+namespace QRCodeGeneratorApp.Api.Endpoints.WeatherForecast
+{
+    public class GetWeatherForecast : ICarterModule
+    {
+        public void AddRoutes(IEndpointRouteBuilder app)
+        {
+            MapGetWeatherEndpoint(app);
+        }
+
+        public void MapGetWeatherEndpoint(IEndpointRouteBuilder app)
+        {
+            var summaries = new[]
+                {
+                    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+                };
+
+            app.MapGet("/weatherforecast", () =>
+            {
+                var forecast = Enumerable.Range(1, 5).Select(index =>
+                    new WeatherForecast
+                    (
+                        DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                        Utilities.GenerateRandomNumber(-20, 55),    // Use helper nuhget package
+                        summaries[Random.Shared.Next(summaries.Length)]
+                    ))
+                    .ToArray();
+                return forecast;
+            })
+            .WithName("GetWeatherForecast");
+
+        }
+    }
+
+    internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+    {
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+}

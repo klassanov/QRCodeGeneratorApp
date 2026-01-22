@@ -1,0 +1,24 @@
+<!--Generated with dotent sln migrate command-->
+<Solution>
+  <Folder Name="/azure-pipelines/">
+    <File Path="azure-pipelines/qrcodegeneratorapp-ci-cd.yml" />
+    <File Path="azure-pipelines/qrcodegeneratorapp-nuget.yml" />
+    <File Path="azure-pipelines/qrcodegeneratorapp-release.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="nuget.config" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="QRCodeGeneratorApp.Api/QRCodeGeneratorApp.Api.csproj" />
+  <Project Path="QRCodeGeneratorApp.AppHost/QRCodeGeneratorApp.AppHost.csproj" />
+  <Project Path="QRCodeGeneratorApp.BackgroundJobScheduler/QRCodeGeneratorApp.BackgroundJobScheduler.csproj" Id="b6202e74-b9c6-4ee3-a471-70eb1945de08" />
+  <Project Path="QRCodeGeneratorApp.Console/QRCodeGeneratorApp.Console.csproj" />
+  <Project Path="QRCodeGeneratorApp.Helper/QRCodeGeneratorApp.Helper.csproj" Id="96687d70-10c5-4b8e-90f8-3a4458cfd6e0" />
+  <Project Path="QRCodeGeneratorApp.Persistence/QRCodeGeneratorApp.Persistence.csproj" />
+  <Project Path="QRCodeGeneratorApp.ServiceDefaults/QRCodeGeneratorApp.ServiceDefaults.csproj" />
+  <Project Path="QRGeneratorApp.Core/QRGeneratorApp.Core.csproj" />
+</Solution>

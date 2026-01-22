@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!--Used Directory.Build.props file-->
+    <!--<TargetFramework>net9.0</TargetFramework>-->
+    <!--<Nullable>enable</Nullable>-->
+    <!--<ImplicitUsings>enable</ImplicitUsings>-->
+    <UserSecretsId>c0ef39bd-fdc3-47e8-baf4-c0f58ecbd39f</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+    <PackageReference Include="AspNetCore.HealthChecks.Rabbitmq" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" />
+    <PackageReference Include="Carter" />
+    <PackageReference Include="KubernetesClient" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="QRCodeGeneratorApp.Helper" />
+    <PackageReference Include="Scalar.AspNetCore" />
+
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" VersionOverride="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QRCodeGeneratorApp.Persistence\QRCodeGeneratorApp.Persistence.csproj" />
+    <ProjectReference Include="..\QRGeneratorApp.Core\QRGeneratorApp.Core.csproj" />
+    <ProjectReference Include="..\QRCodeGeneratorApp.ServiceDefaults\QRCodeGeneratorApp.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>

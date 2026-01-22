@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!--Used Directory.Build.props file-->
+    <!--<TargetFramework>net9.0</TargetFramework>-->
+    <!--<ImplicitUsings>enable</ImplicitUsings>-->
+    <!--<Nullable>enable</Nullable>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Net.Codecrete.QrCodeGenerator" />
+    <PackageReference Include="SkiaSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QRGeneratorApp.Core\QRGeneratorApp.Core.csproj" />
+    <ProjectReference Include="..\QRCodeGeneratorApp.ServiceDefaults\QRCodeGeneratorApp.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>

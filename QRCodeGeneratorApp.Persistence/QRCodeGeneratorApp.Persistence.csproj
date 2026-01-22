@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--Used Directory.Build.props file-->
+    <!--<TargetFramework>net9.0</TargetFramework>-->
+    <!--<ImplicitUsings>enable</ImplicitUsings>-->
+    <!--<Nullable>enable</Nullable>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.MongoDB.Driver.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QRGeneratorApp.Core\QRGeneratorApp.Core.csproj" />
+  </ItemGroup>
+  
+</Project>
