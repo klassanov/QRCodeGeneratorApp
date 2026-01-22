@@ -5,9 +5,13 @@
 
 trigger:
 - master
+- main
+- develop
+- release/*
 
 pr:
 - master
+- main
 - develop
 
 pool:
