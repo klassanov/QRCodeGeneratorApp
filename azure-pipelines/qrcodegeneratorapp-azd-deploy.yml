@@ -44,34 +44,35 @@ steps:
       version: '10.x'
     displayName: Set up .NET 10
 
-  # - task: AzureCLI@2
-  #   displayName: Provision Infrastructure
-  #   inputs:
-  #     azureSubscription: azconnection
-  #     scriptType: bash
-  #     scriptLocation: inlineScript
-  #     keepAzSessionActive: true
-  #     inlineScript: |
-  #       azd provision --no-prompt
-  #   env:
-  #     AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-  #     AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-  #     AZURE_LOCATION: $(AZURE_LOCATION)
-  #     AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
-  #     AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
+  - task: AzureCLI@2
+    displayName: Provision Infrastructure
+    inputs:
+      azureSubscription: $(AZURE_SERVICE_CONNECTION)
+      scriptType: bash
+      scriptLocation: inlineScript
+      keepAzSessionActive: true
+      inlineScript: |
+        azd provision --no-prompt
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+      AZURE_SERVICE_CONNECTION: $(AZURE_SERVICE_CONNECTION)
+      AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
 
-  # - task: AzureCLI@2
-  #   displayName: Deploy Application
-  #   inputs:
-  #     azureSubscription: azconnection
-  #     scriptType: bash
-  #     scriptLocation: inlineScript
-  #     keepAzSessionActive: true
-  #     inlineScript: |
-  #       azd deploy --no-prompt
-  #   env:
-  #     AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
-  #     AZURE_ENV_NAME: $(AZURE_ENV_NAME)
-  #     AZURE_LOCATION: $(AZURE_LOCATION)
-  #     AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
+  - task: AzureCLI@2
+    displayName: Deploy Application
+    inputs:
+      azureSubscription: $(AZURE_SERVICE_CONNECTION)
+      scriptType: bash
+      scriptLocation: inlineScript
+      keepAzSessionActive: true
+      inlineScript: |
+        azd deploy --no-prompt
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+      AZURE_SERVICE_CONNECTION: $(AZURE_SERVICE_CONNECTION)
+      AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
 
