@@ -4,8 +4,8 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 
 | Build Azure Pipelines |
 | :----------- |
-| [![QRCodeGeneratorApp-CI-CD Status - develop branch](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=develop&label=QRCodeGeneratorApp-CI-CD%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=develop) |
-| [![QRCodeGeneratorApp-Nuget Status - develop branch](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2FQRCodeGeneratorApp-Nuget?branchName=develop&label=QRCodeGeneratorApp-Nuget%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=29&branchName=develop) | 
+| [![QRCodeGeneratorApp-CI-CD Status - develop branch](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=develop&label=QRCodeGeneratorApp-CI-CD%20Status-develop%20branch)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=develop) |
+| [![QRCodeGeneratorApp-Nuget Status - develop branch](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2FQRCodeGeneratorApp-Nuget?branchName=develop&label=QRCodeGeneratorApp-Nuget%20Status-develop%20branch)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=29&branchName=develop) | 
 
 
 
