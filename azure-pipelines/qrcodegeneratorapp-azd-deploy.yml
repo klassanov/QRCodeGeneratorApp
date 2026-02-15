@@ -1,0 +1,78 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger: none
+pr: none
+  
+pool:
+  vmImage: 'ubuntu-latest'
+
+# variables:
+#   buildPlatform: 'Any CPU'
+#   buildConfiguration: 'Release'
+#   currentDate: $[ format('{0:yyyy}{0:MM}{0:dd}', pipeline.startTime) ]
+#   majorVersion: 1
+#   minorVersion: 1
+#   patchVersion: $[counter(variables['majorVersion'], 100)]  
+#   nugetPackageVersion: '$(majorVersion).$(minorVersion).$(patchVersion)'
+
+
+steps:
+  # setup-azd@1 needs to be manually installed in your organization
+  # if you can't install it, you can use the below bash script to install azd
+  # and remove this step
+  - task: setup-azd@1
+    displayName: Install azd
+
+  # If you can't install above task in your organization, you can comment it and uncomment below task to install azd
+  # - task: Bash@3
+  #   displayName: Install azd
+  #   inputs:
+  #     targetType: 'inline'
+  #     script: |
+  #       curl -fsSL https://aka.ms/install-azd.sh | bash
+
+  # azd delegate auth to az to use service connection with AzureCLI@2
+  - pwsh: |
+      azd config set auth.useAzCliAuth "true"
+    displayName: Configure AZD to Use AZ CLI Authentication.
+ 
+  - task: UseDotNet@2
+    inputs:
+      version: '10.x'
+    displayName: Set up .NET 10
+
+  - task: AzureCLI@2
+    displayName: Provision Infrastructure
+    inputs:
+      azureSubscription: $(AZURE_SERVICE_CONNECTION)
+      scriptType: bash
+      scriptLocation: inlineScript
+      keepAzSessionActive: true
+      inlineScript: |
+        azd provision --no-prompt
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+      AZURE_SERVICE_CONNECTION: $(AZURE_SERVICE_CONNECTION)
+      AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
+
+  - task: AzureCLI@2
+    displayName: Deploy Application
+    inputs:
+      azureSubscription: $(AZURE_SERVICE_CONNECTION)
+      scriptType: bash
+      scriptLocation: inlineScript
+      keepAzSessionActive: true
+      inlineScript: |
+        azd deploy --no-prompt
+    env:
+      AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+      AZURE_ENV_NAME: $(AZURE_ENV_NAME)
+      AZURE_LOCATION: $(AZURE_LOCATION)
+      AZURE_SERVICE_CONNECTION: $(AZURE_SERVICE_CONNECTION)
+      AZURE_MONGODB_SERVER_PASSWORD: $(AZURE_MONGODB_SERVER_PASSWORD)
+
