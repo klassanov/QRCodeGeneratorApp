@@ -20,6 +20,7 @@
   <Project Path="QRCodeGeneratorApp.Console/QRCodeGeneratorApp.Console.csproj" />
   <Project Path="QRCodeGeneratorApp.Helper/QRCodeGeneratorApp.Helper.csproj" Id="96687d70-10c5-4b8e-90f8-3a4458cfd6e0" />
   <Project Path="QRCodeGeneratorApp.Infrastructure/QRCodeGeneratorApp.Infrastructure.csproj" Id="7bba7dbb-8546-4f32-b5dd-034870b69dd1" />
+  <Project Path="QRCodeGeneratorApp.IntegrationTests/QRCodeGeneratorApp.IntegrationTests.csproj" Id="19174403-3f21-4fc2-8ea7-54501d876467" />
   <Project Path="QRCodeGeneratorApp.Persistence/QRCodeGeneratorApp.Persistence.csproj" />
   <Project Path="QRCodeGeneratorApp.ServiceDefaults/QRCodeGeneratorApp.ServiceDefaults.csproj" />
   <Project Path="QRGeneratorApp.Core/QRGeneratorApp.Core.csproj" />
