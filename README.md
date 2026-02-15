@@ -4,8 +4,8 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 
 | Build Azure Pipelines |
 | :----------- |
-| [![QRCodeGeneratorApp-CI-CD Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=master&label=QRCodeGeneratorApp-CI-CD%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=master) |
-| [![QRCodeGeneratorApp-Nuget Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2FQRCodeGeneratorApp-Nuget?branchName=master&label=QRCodeGeneratorApp-Nuget%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=29&branchName=master) | 
+| [![QRCodeGeneratorApp-CI-CD Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2Fklassanov.QRCodeGeneratorApp?branchName=develop&label=QRCodeGeneratorApp-CI-CD%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=27&branchName=develop) |
+| [![QRCodeGeneratorApp-Nuget Status](https://dev.azure.com/klassanov/QR%20Generator/_apis/build/status%2FQRCodeGeneratorApp-Nuget?branchName=develop&label=QRCodeGeneratorApp-Nuget%20Status)](https://dev.azure.com/klassanov/QR%20Generator/_build/latest?definitionId=29&branchName=develop) | 
 
 
 
@@ -21,7 +21,9 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 - Custom middleware addition 3 options: Conventional, Factory, Inline. Consume a scoped service in custom middleware
 - Private NuGet Feed using Azure Artifacts: Package, Push and Consume a private NuGet package QRCodeGenerator.Helper
 - Server Sent Events (SSE) implementation
-- Channel implmentation
+- Channel implementation
+- Azure Pipelines for CI/CD
+- MongoDB Integration
 
 ## List of First-Time Libraries Usage
 
@@ -35,7 +37,6 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 ## TODOs List
 
 - Rate Limiter
-- MongoDB Integration
 - Redis Integration (Caching, Distributed Locking, Message Broker)
 - Result Object Pattern
-- Azure Pipelines for CI/CD
+- Aspire Integration Testing
