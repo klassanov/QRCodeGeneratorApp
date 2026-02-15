@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using QRCodeGeneratorApp.BackgroundJobScheduler.Jobs;
+﻿using QRCodeGeneratorApp.BackgroundJobScheduler.Jobs;
 using QRCodeGeneratorApp.BackgroundJobScheduler.Scheduling;
 using TickerQ.DependencyInjection;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +24,4 @@ using (var scope = app.Services.CreateScope())
    _= await jobScheduler.ScheduleRecurringJob(nameof(PublishOrderPlacementJob), "*/1 * * * * *"); // Every 1 minute
 }
 
-
 await app.RunAsync();
-
-
-
-
-

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TickerQ.Utilities;
-using TickerQ.Utilities.Entities;
+﻿using TickerQ.Utilities.Entities;
 using TickerQ.Utilities.Interfaces.Managers;
 
 namespace QRCodeGeneratorApp.BackgroundJobScheduler.Scheduling

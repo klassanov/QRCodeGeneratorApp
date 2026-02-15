@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TickerQ.Utilities.Base;
+﻿using TickerQ.Utilities.Base;
 
 namespace QRCodeGeneratorApp.BackgroundJobScheduler.Jobs
 {
-    public class HelloWorldJob
+    internal class HelloWorldJob
     {
         [TickerFunction(nameof(HelloWorldJob))]
         public async Task HelloWorld(TickerFunctionContext context, CancellationToken cancellationToken)
