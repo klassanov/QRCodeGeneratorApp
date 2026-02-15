@@ -1,6 +1,6 @@
 ﻿using QRCodeGeneratorApp.Api.Healthcheck.Checks;
 
-namespace QRCodeGeneratorApp.Api.StartupTasks
+namespace QRCodeGeneratorApp.Api.BackgroundTasks
 {
     public class StartupBackgroundService : BackgroundService
     {

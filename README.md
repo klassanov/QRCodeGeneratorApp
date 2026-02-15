@@ -20,6 +20,8 @@ for experimenting with some concepts/small building blocks and libraries in .NET
 - Central Package Management using Directory.Build.props
 - Custom middleware addition 3 options: Conventional, Factory, Inline. Consume a scoped service in custom middleware
 - Private NuGet Feed using Azure Artifacts: Package, Push and Consume a private NuGet package QRCodeGenerator.Helper
+- Server Sent Events (SSE) implementation
+- Channel implmentation
 
 ## List of First-Time Libraries Usage
 
